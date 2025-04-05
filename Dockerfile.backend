@@ -1,0 +1,46 @@
+# Builder stage
+FROM python:3.9-slim AS builder
+
+WORKDIR /app
+
+# Copy requirements first for better caching
+COPY ./backend/requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir --user -r requirements.txt
+
+# Copy only necessary application files
+COPY ./backend .
+
+# Final stage
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Create a non-root user to run the application
+RUN adduser --disabled-password --gecos "" appuser
+
+# Copy installed packages from builder
+COPY --from=builder /root/.local /home/appuser/.local
+ENV PATH=/home/appuser/.local/bin:$PATH
+
+# Copy application from builder
+COPY --from=builder /app /app
+
+# Set ownership to non-root user
+RUN chown -R appuser:appuser /app
+
+# Switch to non-root user
+USER appuser
+
+# Expose the port the app runs on
+EXPOSE 8000
+
+# Set production environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    APP_ENV=production \
+    LOG_LEVEL=error
+
+# Command to run the application with production settings
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "--no-access-log"]
