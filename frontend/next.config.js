@@ -47,8 +47,8 @@ const nextConfig = {
   
   // Environment variables configuration
   env: {
-    API_URL: process.env.API_URL || 'http://localhost:8000',
-    WEBSOCKET_URL: process.env.WEBSOCKET_URL || 'ws://localhost:8000/ws',
+    API_URL: process.env.API_URL || 'https://api.productiondomain.com',
+    WEBSOCKET_URL: process.env.WEBSOCKET_URL || 'wss://api.productiondomain.com/ws',
     RECOMMENDATION_ENDPOINT: process.env.RECOMMENDATION_ENDPOINT || '/api/recommendations',
     COURSES_ENDPOINT: process.env.COURSES_ENDPOINT || '/api/courses',
     AUTH_ENDPOINT: process.env.AUTH_ENDPOINT || '/api/auth',

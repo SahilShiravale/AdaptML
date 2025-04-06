@@ -73,10 +73,10 @@ app = FastAPI(
 
 # Configure CORS
 origins = [
-    "http://localhost:3000",  # Frontend development server
-    "https://localhost:3000",
+    "https://www.productiondomain.com",  # Production frontend URL
+    "https://api.productiondomain.com",  # Production API URL
     "http://frontend:3000",   # Docker container name
-    os.getenv("FRONTEND_URL", "http://localhost:3000"),
+    os.getenv("FRONTEND_URL", "https://www.productiondomain.com"),
 ]
 
 app.add_middleware(
