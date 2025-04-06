@@ -1,7 +1,6 @@
 # AI-Powered Learning Recommendation System
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI/CD](https://github.com/yourusername/AI-Recommendation/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/yourusername/AI-Recommendation/actions/workflows/ci-cd.yml)
+
 
 ## Overview
 
